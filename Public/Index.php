@@ -712,9 +712,9 @@
                         <a class="nav-link nav-link-custom" href="#reglas">Políticas</a>
                     </li>
                     <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                        <button class="btn-premium" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <a class="btn-premium text-white text-decoration-none" href="../view/auth/login.php">
                             <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
-                        </button>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -736,9 +736,9 @@
                         Optimice el control de existencias en tiempo real, garantice la trazabilidad de sus lotes químicos, prevenga el desabastecimiento con alertas automáticas y gestione facturación POS de alta fiabilidad. Diseñado para distribuidoras de insumos líderes en el sector agro.
                     </p>
                     <div class="d-flex flex-wrap gap-3">
-                        <button class="btn-accent" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <a class="btn-accent text-decoration-none" href="../view/auth/login.php">
                             <i class="bi bi-speedometer2"></i> Acceder al Demo
-                        </button>
+                        </a>
                         <a href="#modulos" class="btn-outline-premium text-white border-white-50">
                             Explorar Módulos <i class="bi bi-arrow-down-short"></i>
                         </a>
@@ -989,85 +989,6 @@
         </div>
     </section>
 
-    <!-- Modal de Inicio de Sesión -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content modal-content-custom">
-                <div class="modal-header modal-header-custom text-center d-block">
-                    <h3 class="modal-title fw-bold text-white display-font" id="loginModalLabel">Portal del Sistema</h3>
-                    <p class="text-white-50 mb-0">Seleccione su rol e introduzca sus credenciales autorizadas</p>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body-custom">
-                    <!-- Selector de Roles -->
-                    <div class="login-role-select">
-                        <div class="role-btn active" onclick="selectRole('administrador')">
-                            <i class="bi bi-shield-lock-fill d-block fs-4 mb-1"></i> Administrador
-                        </div>
-                        <div class="role-btn" onclick="selectRole('vendedor')">
-                            <i class="bi bi-shop d-block fs-4 mb-1"></i> Vendedor
-                        </div>
-                        <div class="role-btn" onclick="selectRole('cliente')">
-                            <i class="bi bi-person-fill-check d-block fs-4 mb-1"></i> Cliente
-                        </div>
-                    </div>
-
-                    <!-- Formulario de Login -->
-                    <form action="#" method="POST" id="loginForm" onsubmit="handleLogin(event)">
-                        <!-- Input Rol Escondido -->
-                        <input type="hidden" name="rol" id="userRole" value="administrador">
-
-                        <!-- Correo Electrónico -->
-                        <div class="mb-3">
-                            <label for="loginEmail" class="form-label fw-semibold text-dark fs-6">Correo Electrónico</label>
-                            <div class="form-group-icon">
-                                <input type="email" class="form-control form-control-custom" id="loginEmail" placeholder="nombre@correo.com" required>
-                                <i class="bi bi-envelope-fill"></i>
-                            </div>
-                        </div>
-
-                        <!-- Contraseña -->
-                        <div class="mb-4">
-                            <div class="d-flex justify-content-between">
-                                <label for="loginPassword" class="form-label fw-semibold text-dark fs-6">Contraseña</label>
-                                <a href="#" class="text-success text-decoration-none small fw-semibold">¿La olvidó?</a>
-                            </div>
-                            <div class="form-group-icon">
-                                <input type="password" class="form-control form-control-custom" id="loginPassword" placeholder="••••••••••••" required>
-                                <i class="bi bi-lock-fill"></i>
-                            </div>
-                        </div>
-
-                        <!-- Recordar sesión -->
-                        <div class="mb-4 d-flex justify-content-between align-items-center">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="rememberMe">
-                                <label class="form-check-label text-secondary small" for="rememberMe">
-                                    Recordar sesión por 30 días
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Botón Enviar -->
-                        <button type="submit" class="btn-premium w-100 justify-content-center py-3">
-                            <i class="bi bi-box-arrow-in-right"></i> Entrar al Sistema
-                        </button>
-                    </form>
-                    
-                    <!-- Simulación de credenciales de prueba -->
-                    <div class="mt-4 p-3 bg-light border rounded-3">
-                        <div class="d-flex align-items-center gap-2 mb-2 text-dark fw-bold small">
-                            <i class="bi bi-info-circle-fill text-success"></i> Acceso rápido para demostración:
-                        </div>
-                        <div id="credentialDetails" class="small text-secondary">
-                            <strong>Usuario:</strong> admin@agrostock.com<br>
-                            <strong>Contraseña:</strong> admin123 (Rol Administrador)
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Pie de Página -->
     <footer class="footer-section">
@@ -1137,38 +1058,6 @@
             }
         });
 
-        // Cambio de Rol en Formulario de Login
-        function selectRole(role) {
-            // Actualizar clases de botones
-            document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            
-            // Actualizar input oculto
-            document.getElementById('userRole').value = role;
-
-            // Actualizar credenciales de prueba mostradas para facilidad de testeo del usuario
-            const credentialBox = document.getElementById('credentialDetails');
-            if (role === 'administrador') {
-                credentialBox.innerHTML = `<strong>Usuario:</strong> admin@agrostock.com<br><strong>Contraseña:</strong> admin123 (Rol Administrador)`;
-            } else if (role === 'vendedor') {
-                credentialBox.innerHTML = `<strong>Usuario:</strong> vendedor@agrostock.com<br><strong>Contraseña:</strong> vend123 (Rol Vendedor)`;
-            } else if (role === 'cliente') {
-                credentialBox.innerHTML = `<strong>Usuario:</strong> cliente@agrostock.com<br><strong>Contraseña:</strong> cliente123 (Rol Cliente)`;
-            }
-        }
-
-        // Manejador del Login
-        function handleLogin(e) {
-            e.preventDefault();
-            const role = document.getElementById('userRole').value;
-            const email = document.getElementById('loginEmail').value;
-            
-            alert('Simulación de Ingreso Autorizado:\nHas iniciado sesión exitosamente como ' + role.toUpperCase() + ' (' + email + ').\n\nEl sistema validará esta sesión contra el modelo de base de datos MySQL.');
-            
-            // Cerrar el modal
-            const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-            loginModal.hide();
-        }
     </script>
 </body>
 </html>
